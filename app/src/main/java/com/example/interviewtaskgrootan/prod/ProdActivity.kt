@@ -88,8 +88,6 @@ class ProdActivity : AppCompatActivity() {
         Collections.swap(box,position1?:0,position2?:1)
         rvMethod(box)
         prodadpater?.filter(box)
-        cancelTimer()
-        startTimer()
     }
 
     fun startTimer() {

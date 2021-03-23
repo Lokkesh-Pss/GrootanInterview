@@ -56,7 +56,9 @@ class Devadapter(): RecyclerView.Adapter<Devadapter.Myholder>() {
                 holder.checkBox3.isChecked = false
                 checked!!.put(position, false)
                 count -= 1
+                checkedArray?.remove(position)
             }
+
             if (count == 2) {
                 clickables?.swapMethod(checkedArray)
                 checkedArray?.clear()
