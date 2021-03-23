@@ -23,6 +23,7 @@ class DevActivity : AppCompatActivity() {
     var devadapter: Devadapter? = null
     var sharedPreferences: SharedPreferences?=null
     var cTimer: CountDownTimer? = null
+    var startshuff:Boolean=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activityDevBinding = ActivityDevBinding.inflate(layoutInflater)
@@ -56,6 +57,7 @@ class DevActivity : AppCompatActivity() {
             }
     }
     private fun shuffel() {
+        startshuff=true
         Collections.shuffle(box)
         rvMethod(box)
         cancelTimer()
@@ -67,6 +69,7 @@ class DevActivity : AppCompatActivity() {
         devadapter = Devadapter(
             this,
             rvbox,
+                startshuff,
             object :
                 Devadapter.clickable {
                 override fun swapMethod(checkedArray: ArrayList<Int>?) {

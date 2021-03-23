@@ -18,11 +18,12 @@ class Prodadpater(): RecyclerView.Adapter<Prodadpater.Myholder>() {
     var count = 0
     var clickables : clickable?=null
     var checkedArray:ArrayList<Int>?=null
-
-    constructor(prodadpaters: ProdActivity, box: ArrayList<String>?, clickables: clickable):this() {
+    var prodstartshuff:Boolean?=null
+    constructor(prodadpaters: ProdActivity, box: ArrayList<String>?,prodstartshuffs:Boolean, clickables: clickable):this() {
         this.box = box
         this.mContext = prodadpaters
         this.clickables = clickables
+        this.prodstartshuff = prodstartshuffs
         checked = SparseBooleanArray()
         checkedArray = ArrayList()
     }
@@ -41,6 +42,7 @@ class Prodadpater(): RecyclerView.Adapter<Prodadpater.Myholder>() {
         val ab = box!![position]
         holder.name.setBackgroundColor(Color.parseColor(ab))
         holder.checkBox3.isChecked = checked!![position, false]
+        if (prodstartshuff!!){
 
         holder.checkBox3.setOnClickListener {
             if (!checked!![position, false]) {
@@ -57,6 +59,9 @@ class Prodadpater(): RecyclerView.Adapter<Prodadpater.Myholder>() {
                 clickables?.swapMethod(checkedArray)
                 checkedArray?.clear()
             }
+        }
+        }else{
+            holder.checkBox3.visibility=View.GONE
         }
     }
 

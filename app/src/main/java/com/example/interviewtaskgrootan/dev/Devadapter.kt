@@ -20,10 +20,12 @@ class Devadapter(): RecyclerView.Adapter<Devadapter.Myholder>() {
     var count = 0
     var clickables : clickable?=null
     var checkedArray:ArrayList<Int>?=null
-    constructor(devActivity: DevActivity?, box: ArrayList<String>?, clickable: clickable):this() {
+    var startshuff:Boolean?=null
+    constructor(devActivity: DevActivity?, box: ArrayList<String>?, startshuffs:Boolean,clickable: clickable):this() {
         this.box = box
         this.mContext = devActivity
         this.clickables = clickable
+        this.startshuff = startshuffs
         checked = SparseBooleanArray()
         checkedArray = ArrayList()
     }
@@ -43,7 +45,7 @@ class Devadapter(): RecyclerView.Adapter<Devadapter.Myholder>() {
         val ab = box!![position]
         holder.name.setBackgroundColor(Color.parseColor(ab))
         holder.checkBox3.isChecked = checked!![position, false]
-
+        if (startshuff!!) {
         holder.checkBox3.setOnClickListener {
             if (!checked!![position, false]) {
                 holder.checkBox3.isChecked = true
@@ -60,7 +62,9 @@ class Devadapter(): RecyclerView.Adapter<Devadapter.Myholder>() {
                 checkedArray?.clear()
             }
         }
-
+    }else{
+            holder.checkBox3.visibility=View.GONE
+        }
     }
 
     fun filter(box: ArrayList<String>) {

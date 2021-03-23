@@ -21,6 +21,7 @@ class ProdActivity : AppCompatActivity() {
     var prodadpater: Prodadpater? = null
     var cTimer: CountDownTimer? = null
     var sharedPreferences: SharedPreferences?=null
+    var prodstartshuff:Boolean=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_prod)
@@ -64,6 +65,7 @@ class ProdActivity : AppCompatActivity() {
     }
 
     private fun shuffel() {
+        prodstartshuff=true
         Collections.shuffle(box)
         rvMethod(box)
         cancelTimer()
@@ -72,7 +74,7 @@ class ProdActivity : AppCompatActivity() {
 
     private fun rvMethod(rvbox: ArrayList<String>) {
         activityProdBinding?.prodRV?.setLayoutManager(GridLayoutManager(applicationContext, 4))
-        prodadpater = Prodadpater(this, rvbox, object : Prodadpater.clickable {
+        prodadpater = Prodadpater(this, rvbox,prodstartshuff, object : Prodadpater.clickable {
             override fun swapMethod(checkedArray: ArrayList<Int>?) {
                 val position1 = checkedArray?.get(0)
                 val position2 = checkedArray?.get(1)

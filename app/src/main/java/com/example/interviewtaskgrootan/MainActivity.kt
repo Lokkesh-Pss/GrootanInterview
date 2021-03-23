@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.widget.RadioGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.interviewtaskgrootan.databinding.ActivityMainBinding
 import com.example.interviewtaskgrootan.dev.DevActivity
@@ -48,7 +49,6 @@ class MainActivity : AppCompatActivity() {
         mainBinding?.signInButton?.setOnClickListener {
             signIn()
         }
-        mainBinding?.devradio?.setChecked(true)
         mainBinding?.radiogroup?.setOnCheckedChangeListener{ group, checkedId ->
             if (checkedId==R.id.devradio){
                 selected="dev"
@@ -65,8 +65,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun signIn() {
-        val signInIntent = mGoogleSignInClient!!.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
+        if (selected.equals("na")||selected.isEmpty()){
+            Toast.makeText(applicationContext,"Please select the above option ",Toast.LENGTH_SHORT).show()
+        }else{
+            val signInIntent = mGoogleSignInClient!!.signInIntent
+            startActivityForResult(signInIntent, RC_SIGN_IN)
+        }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
